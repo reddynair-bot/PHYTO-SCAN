@@ -57,7 +57,6 @@ st.set_page_config(
 )
 
 st.title("🌱 PHYTO-SCAN")
-st.success("UPDATED VERSION TEST")
 st.subheader("AI-Assisted Plant Health Analysis")
 
 st.write(
@@ -173,6 +172,69 @@ care_guidance = {
         "Keep the suspected plant separate where practical.",
         "Clean gardening tools after handling the plant.",
         "Seek expert advice because different viruses can cause similar symptoms."
+    ]
+}
+# ---------------- WHY THIS PREDICTION ----------------
+
+prediction_explanations = {
+    "healthy": [
+        "The model did not detect a strong disease pattern in the uploaded leaf.",
+        "The leaf appears relatively uniform in colour and visible pattern.",
+        "Continue monitoring the plant for new spots, colour changes or unusual growth."
+    ],
+
+    "bacterial spot": [
+        "Bacterial spot can produce small dark or water-soaked-looking spots on leaves.",
+        "The model detected visual patterns that are associated with the Bacterial Spot class.",
+        "Similar-looking symptoms can occur in other plant conditions."
+    ],
+
+    "early blight": [
+        "Early blight can produce dark spots and circular lesion patterns on leaves.",
+        "The model detected visual patterns associated with the Early Blight class.",
+        "Similar symptoms can occur in other leaf diseases."
+    ],
+
+    "late blight": [
+        "Late blight can cause dark or water-soaked-looking areas on leaves.",
+        "The model detected visual patterns associated with the Late Blight class.",
+        "Symptoms can overlap with other plant diseases."
+    ],
+
+    "leaf mold": [
+        "Leaf mold can cause changes in leaf colour and visible patterns, especially under humid conditions.",
+        "The model detected visual patterns associated with the Leaf Mold class.",
+        "Checking the underside of leaves can provide additional information."
+    ],
+
+    "septoria": [
+        "Septoria leaf spot commonly produces multiple small spots on leaves.",
+        "The model detected visual patterns associated with the Septoria Leaf Spot class.",
+        "Other leaf diseases can sometimes produce similar spots."
+    ],
+
+    "spider mites": [
+        "Spider-mite damage can produce fine speckling or stippling on leaves.",
+        "The model detected visual patterns associated with the Spider Mites class.",
+        "The undersides of leaves should be checked for mites or fine webbing."
+    ],
+
+    "target spot": [
+        "Target Spot can produce circular lesions with visible patterns on leaves.",
+        "The model detected visual patterns associated with the Target Spot class.",
+        "Similar circular lesions can occur in other diseases."
+    ],
+
+    "virus": [
+        "Plant viruses can cause unusual leaf colour patterns, curling or distortion.",
+        "The model detected visual patterns associated with the virus class.",
+        "Different viral diseases can have similar symptoms."
+    ],
+
+    "mosaic": [
+        "Mosaic viruses can produce irregular light and dark green patterns on leaves.",
+        "The model detected visual patterns associated with the Tomato Mosaic Virus class.",
+        "Different plant viruses can have similar visual symptoms."
     ]
 }
 
@@ -309,6 +371,18 @@ if uploaded_file is not None:
 
         for suggestion in care_guidance[care_key]:
             st.markdown(f"- {suggestion}")
+        # ---------------- WHY THIS PREDICTION ----------------
+
+        st.divider()
+        st.subheader("🔎 Why this prediction?")
+
+        for explanation in prediction_explanations[care_key]:
+            st.markdown(f"- {explanation}")
+
+        st.caption(
+            "This section provides general educational context for the predicted class. "
+            "It does not show the exact visual features used by the AI model."
+        )
 
         # ---------------- DISCLAIMER ----------------
 
